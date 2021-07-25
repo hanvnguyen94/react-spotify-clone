@@ -19,12 +19,17 @@ app.post('/refresh', (req, res) => {
 	spotifyApi
 		.refreshAccessToken()
 		.then((data) => {
-			console.log(data.body)
+			res.json({
+				accessToken: data.body.access_token,
+				refreshToken: data.body.refresh_token,
+				expiresIn: data.body.expires_in,
+			})
 
 			// Save the access token so that it's used in future calls
 			// spotifyApi.setAccessToken(data.body['access_token'])
 		})
-		.catch(() => {
+		.catch((err) => {
+			console.log(err)
 			res.sendStatus(400)
 		})
 })
@@ -41,12 +46,11 @@ app.post('/login', (req, res) => {
 	spotifyApi
 		.authorizationCodeGrant(code)
 		.then((data) => {
-			console.log(data.body)
-			// res.json({
-			// 	accessToken: data.body.access_token,
-			// 	refreshToken: data.body.refresh_token,
-			// 	expiresIn: data.body.expires_in,
-			// })
+			res.json({
+				accessToken: data.body.access_token,
+				refreshToken: data.body.refresh_token,
+				expiresIn: data.body.expires_in,
+			})
 		})
 		.catch((err) => {
 			console.log(err)
