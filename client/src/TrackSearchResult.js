@@ -1,13 +1,13 @@
 import React from 'react'
 
 export default function TrackSearchResult({ track, chooseTrack }) {
-	const handlePlay = () => {
+	function handlePlay() {
 		chooseTrack(track)
 	}
 
 	return (
 		<div
-			className='d-flex m-2 align-items-center'
+			className='d-flex m-3 align-items-center'
 			style={{ cursor: 'pointer' }}
 			onClick={handlePlay}
 		>
@@ -16,7 +16,7 @@ export default function TrackSearchResult({ track, chooseTrack }) {
 				style={{ height: '64px', width: '64px' }}
 				alt={track.title}
 			/>
-			<div className='ml-3'>
+			<div style={{ marginLeft: '0.8rem' }}>
 				<div>{track.title}</div>
 				<div className='text-muted'>{track.artist}</div>
 			</div>
